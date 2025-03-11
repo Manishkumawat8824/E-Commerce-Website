@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSmart - Online Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-blue: #2874f0;
+            --secondary-yellow: #ffe500;
+            --accent-orange: #fb641b;
+            --text-white: #ffffff;
+            --text-dark: #212121;
+            --background-gray: #f1f3f6;
+            --success-green: #388e3c;
+            --star-yellow: #ffc107;
+            --discount-green: #388e3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-gray);
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: var(--primary-blue);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1248px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            padding-right: 40px;
+        }
+
+        .logo {
+            color: var(--text-white);
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary-yellow);
+            font-style: italic;
+        }
+
+        /* Search Bar */
+        .search-container {
+            flex: 1;
+            max-width: 564px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 2px;
+            font-size: 14px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Navigation */
+        .nav-items {
+            display: flex;
+            align-items: center;
+            margin-left: 40px;
+        }
+
+        .nav-item {
+            margin: 0 20px;
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item i {
+            margin-right: 8px;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1248px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* Categories Section */
+        .categories {
+            background: var(--text-white);
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .category-item {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 8px;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: var(--text-white);
+            padding: 16px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 12px;
+        }
+
+        .product-title {
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .product-rating {
+            background: var(--success-green);
+            color: var(--text-white);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .product-discount {
+            color: var(--discount-green);
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-orange);
+            color: var(--text-white);
+        }
+
+        .btn-primary:hover {
+            background-color: #e85a16;
+        }
+
+        .btn-secondary {
+            background-color: var(--primary-blue);
+            color: var(--text-white);
+            margin-top: 8px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #1c5dc9;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--text-white);
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+
+        .footer-container {
+            max-width: 1248px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: var(--secondary-yellow);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-white);
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            .logo-container {
+                margin-bottom: 16px;
+            }
+
+            .search-container {
+                width: 100%;
+                margin-bottom: 16px;
+            }
+
+            .nav-items {
+                margin-left: 0;
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .nav-item {
+                margin: 0 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="/" class="logo">Shop<span>Smart</span></a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search for products, brands and more">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+
+            <nav class="nav-items">
+                <a href="/login.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    Login
+                </a>
+                <a href="" class="nav-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    Cart
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-tag"></i>
+                    Offers
+                </a>
+                <a href="virutal.html" class="nav-item">
+                    <i class="fas fa-tag"></i>
+                    Virtual
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Categories -->
+        <section class="categories">
+            <div class="category-grid">
+                <div class="category-item">
+                    <img src="fashion1.jpg" alt="Fashion" class="category-icon">
+                    <p>Fashion</p>
+                </div>
+                <div class="category-item">
+                    <img src="electronic.jpg" alt="Electronics" class="category-icon">
+                    <p>Electronics</p>
+                </div>
+                <div class="category-item">
+                    <img src="home.jpg" alt="Home" class="category-icon">
+                    <p>Home</p>
+                </div>
+                <div class="category-item">
+                    <img src="beuty.jpg " alt="Beauty" class="category-icon">
+                    <p>Beauty</p>
+                </div>
+                <!-- Add more categories -->
+            </div>
+        </section>
+
+        <!-- Products -->
+        <section class="products-grid">
+            <!-- Product Card 1 -->
+            <div class="product-card">
+                <img src="product1.jpg" alt="Product 1" class="product-image">
+                <h3 class="product-title">Premium Cotton T-Shirt</h3>
+                <div class="product-price">
+                    ₹499 <span class="product-discount">70% off</span>
+                </div>
+                <div class="product-rating">
+                    4.5 ★
+                </div>
+                <button class="btn btn-primary">Add to Cart</button>
+                <button class="btn btn-secondary">Buy Now</button>
+            </div>
+
+            <!-- Add more product cards -->
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About </h3>
+                <ul class="footer-links">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Help</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Payments</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Social</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add your JavaScript here or link to external file
+    </script>
+</body>
+</html>
